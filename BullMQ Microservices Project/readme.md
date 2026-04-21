@@ -1,4 +1,3 @@
-```markdown
 # BullMQ Microservices Project (Node.js + Redis + Docker)
 
 ## Overview
@@ -31,11 +30,9 @@ The goal is to understand:
 
 ### Flow
 
-```
 
 Client → Order Service → Queue (BullMQ + Redis) → Worker (Mail Service)
 
-```
 
 - Order service does NOT wait for mail to be sent
 - Mail service processes jobs asynchronously
@@ -61,18 +58,14 @@ Client → Order Service → Queue (BullMQ + Redis) → Worker (Mail Service)
 A message queue allows services to communicate asynchronously.
 
 Instead of:
-```
 
 Service A → directly calls → Service B
 
-```
 
 We use:
-```
 
 Service A → Queue → Service B
 
-```
 
 ---
 
@@ -106,7 +99,6 @@ BullMQ aims for:
 
 ## Project Structure (Example)
 
-```
 
 project/
 │
