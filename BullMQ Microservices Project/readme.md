@@ -128,9 +128,7 @@ docker run -d -p 6379:6379 redis
 
 ### 2. Install dependencies
 
-```bash
-npm install
-```
+Run `npm install` in each service directory (order-service/ and mail-service/).
 
 ---
 
@@ -188,7 +186,7 @@ const worker = new Worker("mail-queue", async job => {
 * Add more worker instances:
 
 ```
-node worker.js (x N times)
+node mail-service/worker.js (x N times)
 ```
 
 * Jobs processed in parallel
