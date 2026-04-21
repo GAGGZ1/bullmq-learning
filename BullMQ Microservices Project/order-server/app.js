@@ -14,18 +14,17 @@ const connection = {
 const verifyUser = new Queue("user-verification-queue", { connection });
 const verificationQueueEvents=new QueueEvents("user-verification-queue", { connection });
 
+const mailQueue = new Queue("mail-queue", { connection });
+
 
 app.post("/order", async (req, res) => {
   try {
     const { userId } = req.body;
 
+    // Step 1: Verify user
     const job = await verifyUser.add("verify-user", { userId });
 
-    console.log("JOB ADDED:", job.id);
-
     const result = await job.waitUntilFinished(verificationQueueEvents);
-
-    console.log("JOB RESULT:", result);
 
     const isValidUser = result?.isValidUser ?? false;
 
@@ -33,7 +32,15 @@ app.post("/order", async (req, res) => {
       return res.send({ message: "User is not valid" });
     }
 
-    res.send({ message: "User is valid" });
+    // Step 2: Send mail (async, don't wait)
+    await mailQueue.add("send-mail", {
+      email: "user@example.com",
+      message: "Order placed successfully!"
+    });
+
+    res.send({
+      message: "Order placed & mail queued"
+    });
 
   } catch (err) {
     console.error(err);
