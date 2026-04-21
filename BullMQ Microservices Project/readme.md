@@ -100,17 +100,18 @@ BullMQ aims for:
 ## Project Structure (Example)
 
 
+```
 project/
-│
-├── order-service/
+├── order-service/        # Handles incoming orders (API)
 │   ├── server.js
 │   └── queue.js
 │
-├── mail-service/
+├── mail-service/         # Worker that processes jobs
 │   └── worker.js
 │
-├── docker-compose.yml
+├── docker-compose.yml    # Redis setup
 └── README.md
+```
 
 ````
 
