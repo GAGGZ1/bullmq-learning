@@ -299,5 +299,3 @@ Queues are a **core building block** in modern backend systems.
 
 ---
 
-```
-```
